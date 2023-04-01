@@ -30,10 +30,24 @@ const Booking = require('./models/Booking');
 app.use(express.json());
 app.use(cookieParser());
 app.use('/uploads', express.static(__dirname + '/uploads'));
-app.use(cors());
+
+// Add a middleware function to handle OPTIONS requests
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', 'https://booking-app-req.vercel.app');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  if (req.method === 'OPTIONS') {
+    res.sendStatus(200);
+  } else {
+    next();
+  }
+});
+
+// Enable CORS for specific origins
 app.use(cors({
-  credentials: true,
   origin: 'https://booking-app-req.vercel.app',
+  credentials: true
 }));
 
 async function uploadToS3(path, originalFilename, mimetype) {
