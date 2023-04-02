@@ -35,9 +35,4 @@ jobs:
         run: |
           cd api
           docker build -t $ECR_REGISTRY/$IMAGE_NAME:$IMAGE_TAG .
-          echo "::set-output name=image::$ECR_REGISTRY/$IMAGE_NAME:$IMAGE_TAG"
-
-      - name: Push Docker image to Amazon ECR
-        if: steps.build-image.outputs.image != ''
-        run: |
-          docker push ${{ steps.build-image.outputs.image }}
+          docker push image::$ECR_REGISTRY/$IMAGE_NAME:$IMAGE_TAG
