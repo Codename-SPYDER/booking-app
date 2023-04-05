@@ -5,10 +5,5 @@ WORKDIR /app
 COPY . .
 
 RUN yarn install
-
+EXPOSE 5173 4000
 CMD ["yarn", "start"]
-
-# Restart the container on failure
-HEALTHCHECK --interval=500s \
-            --timeout=3s \
-            CMD curl -f http://localhost:3000 || exit 1
