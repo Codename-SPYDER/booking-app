@@ -50,6 +50,6 @@ jobs:
       working-directory: terraform
       run: terraform validate
 
-    - name: Terraform apply
-      working-directory: terraform
-      run: terraform apply -auto-approve
+    # - name: Terraform apply
+    #   working-directory: terraform
+    #   run: terraform apply -auto-approve
