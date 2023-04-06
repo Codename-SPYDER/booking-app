@@ -111,12 +111,12 @@ resource "aws_ecs_task_definition" "main" {
       protocol      = "tcp"
     }]
     environment = [
-      { name = "MONGO_URL", value = "mongodb+srv://booking:71lZ51xIzzzZz0bI@cluster0.uicsa2b.mongodb.net/?retryWrites=true&w=majority" },
-      { name = "JWT_SECRET", value = "dkfsrgbsdlbeeiffslsdfb" },
-      { name = "S3_ACCESS_KEY", value = "AKIAROQ5VYYWRECX2QPY" },
-      { name = "S3_SECRET_ACCESS_KEY", value = "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" },
-      { name = "HOST_URL", value = "http://localhost:5173/" },
-      { name = "VITE_API_BASE_URL", value = "http://localhost:4000/api" },
+      { name = "MONGO_URL", value = var.MONGO_URL },
+      { name = "JWT_SECRET", value = var.JWT_SECRET },
+      { name = "S3_ACCESS_KEY", value = var.S3_ACCESS_KEY },
+      { name = "S3_SECRET_ACCESS_KEY", value = var.S3_SECRET_ACCESS_KEY },
+      { name = "HOST_URL", value = var.HOST_URL },
+      { name = "VITE_API_BASE_URL", value = var.VITE_API_BASE_URL },
     ]
   }])
   cpu                      = 256
