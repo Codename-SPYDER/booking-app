@@ -37,15 +37,15 @@ jobs:
           docker build -t $ECR_REGISTRY/$IMAGE_NAME:latest .
           docker push $ECR_REGISTRY/$IMAGE_NAME:latest
 
-    - name: Install Terraform
-      uses: hashicorp/setup-terraform@v1
-      with:
-        terraform_version: "1.1.0"
+      - name: Install Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: "1.1.0"
 
-    - name: Terraform init
-      working-directory: terraform
-      run: terraform init
+      - name: Terraform init
+        working-directory: terraform
+        run: terraform init
 
-    - name: Terraform validate
-      working-directory: terraform
-      run: terraform validate
+      - name: Terraform validate
+        working-directory: terraform
+        run: terraform validate
