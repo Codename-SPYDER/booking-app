@@ -10,7 +10,7 @@ env:
   IMAGE_NAME: booking-app
 
 jobs:
-  build-and-push:
+  deploy:
     runs-on: ubuntu-latest
     environment: Production – booking-app-backend
     steps:
