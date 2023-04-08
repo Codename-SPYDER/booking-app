@@ -21,11 +21,17 @@ export function UserContextProvider({children}) {
 	// exhibited during refresh after leaving login page
 	useEffect(() => {
 		if (!user) {
-			axios.get('/profile').then(({data}) => {
-				//console.log(data);
-				setUser(data);
-				setReady(true);
-			});
+			try{
+				axios.get('/profile').then(({data}) => {
+					//console.log(data);
+					if (data) {
+						setUser(data);
+						setReady(true);
+					}	
+				});
+			} catch (e) {
+				alert('Cookie not verified - Please reload page')
+			}
 		}
 	}, []);
 

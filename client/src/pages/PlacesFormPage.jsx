@@ -84,11 +84,17 @@ export default function PlacesFormPage() {
 			setRedirect(true);
 
 		}   else {
-			//new place
+
+			if (!Object.values(placeData).every(field => field)) {
+				alert('Please fill out all fields');
+				return;
+			} else {
+				//new place
 			await axios.post('/places', placeData);
 			setRedirect(true);
+			}
+			
 		}
-		
 	}
 
 	if (redirect) {

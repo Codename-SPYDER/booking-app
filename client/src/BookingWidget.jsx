@@ -25,17 +25,34 @@ export default function BookingWidget({place}) {
 	}
 
 	async function bookThisPlace() {
-		const response = await axios.post('/bookings', {
-			place:place._id,
-			checkIn, 
-			checkOut, 
-			numberofGuests, 
-			name, 
-			phone, 
-			price:numberOfNights * place.price,
-		});
-		const bookingId = response.data._id;
-		setRedirect(`/account/bookings/${bookingId}`);
+		if (!user) {
+			alert("Please log in to book your experience");
+		}
+		else {
+			try{
+				if (!checkIn || !checkOut || !numberofGuests || !name || !phone) {
+					alert('Please fill out all fields');
+					return;
+				} else {
+					const response = await axios.post('/bookings', {
+						place:place._id,
+						checkIn, 
+						checkOut, 
+						numberofGuests, 
+						name, 
+						phone, 
+						price:numberOfNights * place.price,
+					});
+					const bookingId = response.data._id;
+					setRedirect(`/account/bookings/${bookingId}`);
+				}
+			}
+			catch (err) {
+				alert("Please log in to book your experience");
+			}
+		}
+		
+		
 	}
 
 	if (redirect) {
