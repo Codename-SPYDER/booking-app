@@ -57,12 +57,16 @@ async function uploadToS3(path, originalFilename, mimetype) {
 }
 
 function getUserDataFromReq(req) {
-	return new Promise((resolve, reject) => {
-		jwt.verify(req.cookies.token, jwtSecret, {}, async (err, cookieData) => {
-			if (err) throw err;
-			resolve(cookieData);
+		return new Promise((resolve, reject) => {
+			jwt.verify(req.cookies.token, jwtSecret, {}, async (err, cookieData) => {
+				if (err) {
+					console.log('Invalid Cookie');
+					resolve(null);
+				} else {
+					resolve(cookieData);
+				}
+			});
 		});
-	});
 }
 
 app.get('/api/test', (req,res) => {
@@ -131,19 +135,24 @@ app.post('/api/login', async (req,res) => {
 });
 
 app.get('/api/profile', (req, res) => {
-	mongoose.connect(process.env.MONGO_URL);
-	//deconstructing token from request cookie
-	const {token} = req.cookies;
-	//console.log(token);
-	if (token) {
-		jwt.verify(token, jwtSecret, {}, async (err, cookieData) => {
-			if (err) throw err;
-			const {name,email,_id} = await User.findById(cookieData.id);
-			res.json({name,email,_id});
-		});
-	} else {
-		res.json(null);
-	}
+		mongoose.connect(process.env.MONGO_URL);
+		//deconstructing token from request cookie
+		const {token} = req.cookies;
+		//console.log(token);
+		if (token) {
+			jwt.verify(token, jwtSecret, {}, async (err, cookieData) => {
+				if (err) {
+					console.log("Invalid cookie .get/profile");
+					res.cookie('token', '').json(true);
+					res.status(422).json('Cookie not verified - reset cookie');
+				} else {
+					const {name,email,_id} = await User.findById(cookieData.id);
+					res.json({name,email,_id});
+				}
+			});
+		} else {
+			res.json(null);
+		}
 });
 
 
@@ -276,29 +285,33 @@ app.get('/api/places', async (req, res) => {
 app.post('/api/bookings', async (req, res) => {
 	mongoose.connect(process.env.MONGO_URL);
 	const userData = await getUserDataFromReq(req);
-	const {
-		place, 
-		checkIn, 
-		checkOut, 
-		numberofGuests, 
-		name, 
-		phone,
-		price,
-	} = req.body;
-	Booking.create({
-		place, 
-		checkIn, 
-		checkOut, 
-		numberofGuests, 
-		name, 
-		phone,
-		price,
-		user:userData.id,
-	}).then((doc) => {
-		res.json(doc);
-	}).catch((err) => {
-		throw err;
-	});
+	if (userData) {
+		const {
+			place, 
+			checkIn, 
+			checkOut, 
+			numberofGuests, 
+			name, 
+			phone,
+			price,
+		} = req.body;
+		Booking.create({
+			place, 
+			checkIn, 
+			checkOut, 
+			numberofGuests, 
+			name, 
+			phone,
+			price,
+			user:userData.id,
+		}).then((doc) => {
+			res.json(doc);
+		}).catch((err) => {
+			throw err;
+		});
+	} else {
+		res.status(401).json({message: "Invalid token - .post/bookings"});
+	}
 })
 
 
