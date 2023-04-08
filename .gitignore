@@ -2,5 +2,11 @@
 api/node_modules
 api/.env
 api/uploads/*
+<<<<<<< HEAD
 client/.env
 api/yarn-error.log
+=======
+**/.terraform/
+.env
+*.tfvars
+>>>>>>> 3d45b09cefa90f1a87923e1d57a9625bf516e475
