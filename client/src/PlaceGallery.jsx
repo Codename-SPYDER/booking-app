@@ -18,8 +18,8 @@ export default function PlaceGallery({place}) {
 						</button>
 					</div>
 					{place?.photos?.length > 0 && place.photos.map(photo => (
-						<div key={photo}>
-							<Image className='max-w-5xl mx-auto' src={photo} alt="" />
+						<div key={photo} className="object-cover">
+							<Image className='max-w-5xl mx-auto max-h-[480px] object-fit' src={photo} alt="" />
 						</div>
 					))}
 				</div>

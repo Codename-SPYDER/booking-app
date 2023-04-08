@@ -32,25 +32,25 @@ app.use(cookieParser());
 app.use("/uploads", express.static(__dirname + "/uploads"));
 
 // Add a middleware function to handle OPTIONS requests
-app.use((req, res, next) => {
-  res.setHeader(
-    "Access-Control-Allow-Origin",
-    "https://booking-app-req.vercel.app"
-  );
-  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  res.setHeader("Access-Control-Allow-Credentials", "true");
-  if (req.method === "OPTIONS") {
-    res.sendStatus(200);
-  } else {
-    next();
-  }
-});
+//app.use((req, res, next) => {
+//  res.setHeader(
+//    "Access-Control-Allow-Origin",
+//    "https://booking-app-req.vercel.app"
+//  );
+//  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+//  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+//  res.setHeader("Access-Control-Allow-Credentials", "true");
+//  if (req.method === "OPTIONS") {
+//    res.sendStatus(200);
+//  } else {
+//    next();
+//  }
+//});
 
 // Enable CORS for specific origins
 app.use(
   cors({
-    origin: "https://booking-app-req.vercel.app",
+    origin: process.env.HOST_URL,
     credentials: true,
   })
 );
@@ -163,6 +163,8 @@ app.post("/api/login", async (req, res) => {
     } else {
       res.status(422).json("pass not ok");
     }
+  } else {
+    res.status(422).json("pass not ok");
   }
 });
 
@@ -304,6 +306,12 @@ app.post('/api/bookings', async (req, res) => {
 	} else {
 		res.status(401).json({message: "Invalid token - .post/bookings"});
 	}
+})
+
+app.get('/api/places/:id', async (req, res) => {
+	mongoose.connect(process.env.MONGO_URL);
+	const {id} = req.params;
+	res.json(await Place.findById(id));
 })
 
 app.put("/api/places", async (req, res) => {
