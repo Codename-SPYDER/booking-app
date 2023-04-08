@@ -7,7 +7,7 @@ export default function PlaceGallery({place}) {
 	if (showAllPhotos) {
 		return(
 			<div className="absolute inset-0">
-				<div className="p-8 grid gap-4 bg-black min-h-screen">
+				<div className="p-8 grid gap-4 bg-black/90 min-h-screen">
 					<div>
 						<h2 className="text-2xl text-white max-w-5xl mx-auto mb-4">Photos of {place.title}</h2>
 						<button onClick={() => setShowAllPhotos(false)} className="right-12 top-8 fixed flex gap-2 py-2 px-4 rounded-2xl shadow shadow-black text-black">
