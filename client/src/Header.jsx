@@ -14,9 +14,9 @@ export default function Header() {
 		
 	<header className='flex justify-between'>
 		{help ? (
-  <div className="fixed w-full h-screen bg-primary/60 flex flex-col justify-center items-center z-20 top-0 left-0">
-		<p className="bg-gray-100 mb-24 w-1/2 p-8 rounded-md text-lg border-gray-400 border-2">
-			Hi, welcome to my airbnb clone Webapp! <br/><br/> Looks like you have found the help menu, let me give you a short tutorial.
+  <div className="overflow-y-auto fixed w-full h-screen bg-primary/60 flex flex-col justify-center items-center z-20 top-0 left-0">
+		<p className="bg-gray-100 mb-24 w-3/4 2xl:w-1/2 p-8 rounded-md xl:text-lg border-gray-400 border-2">
+			Hi, welcome to my airbnb clone Webapp! <br/><br/> Allow me to provide you with a short tutorial.
 			You can browse and view property listings through the main page; however in order to book a stay you must first create an account. 
 			You can login or create an account by clicking the profile icon in the top right where you will be directed to the login/register page.
 			After logging in and then booking a stay you can view your booking in the My bookings section of your user account, which you can access by clicking your user icon again. 
@@ -52,7 +52,7 @@ export default function Header() {
 		</div>
 		<div className="flex items-center gap-4">
 			<button onClick={toggleHelp}
-			className="bg-gray-300 border-2 rounded-md border-gray-400 hover:scale-90 ease-in-out duration-300 p-0.5 mt-0.5">
+			className="bg-gray-100 border-2 rounded-md border-gray-400 hover:scale-90 ease-in-out duration-300 p-0.5 mt-0.5">
 				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
   				<path strokeLinecap="round" strokeLinejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" />
 				</svg>
