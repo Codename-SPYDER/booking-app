@@ -68,6 +68,16 @@ export default function PlacePage() {
 						<strong>Check-in:</strong> {timeFormat(place.checkIn)} <br />
 						<strong>Check-out:</strong> {timeFormat(place.checkOut)} <br />
 						<strong>Max guests:</strong> {place.maxGuests}
+						{place.perks && (
+							<div className="mt-4 mb-1 font-bold">Perks:</div>
+						)}
+						{place.perks && place.perks.map(perk => (
+							<div className="flex items-center gap-2">
+								<div className="bg-black/60 w-1.5 h-1.5 rounded-full"/>
+								<div className="capitalize">{perk}</div>
+							</div>
+							
+						))}
 					</div>
 					<div>
 						<BookingWidget place={place}/>
