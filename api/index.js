@@ -31,22 +31,6 @@ app.use(express.json());
 app.use(cookieParser());
 app.use("/uploads", express.static(__dirname + "/uploads"));
 
-// Add a middleware function to handle OPTIONS requests
-//app.use((req, res, next) => {
-//  res.setHeader(
-//    "Access-Control-Allow-Origin",
-//    "https://booking-app-req.vercel.app"
-//  );
-//  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-//  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
-//  res.setHeader("Access-Control-Allow-Credentials", "true");
-//  if (req.method === "OPTIONS") {
-//    res.sendStatus(200);
-//  } else {
-//    next();
-//  }
-//});
-
 // Enable CORS for specific origins
 app.use(
   cors({
@@ -223,11 +207,6 @@ app.post(
       const { path, originalname, mimetype } = req.files[i];
       const url = await uploadToS3(path, originalname, mimetype);
       uploadedFiles.push(url);
-      //const parts = originalname.split('.');
-      //const ext = parts[parts.length - 1];
-      //const newPath = path + '.' + ext;
-      //fs.renameSync(path, newPath);
-      //uploadedFiles.push(newPath.replace('uploads/',''));
     }
     res.json(uploadedFiles);
   }
@@ -355,29 +334,6 @@ app.put("/api/places", async (req, res) => {
 app.get("/api/places", async (req, res) => {
   mongoose.connect(process.env.MONGO_URL);
   res.json(await Place.find());
-});
-
-app.post("/api/bookings", async (req, res) => {
-  mongoose.connect(process.env.MONGO_URL);
-  const userData = await getUserDataFromReq(req);
-  const { place, checkIn, checkOut, numberofGuests, name, phone, price } =
-    req.body;
-  Booking.create({
-    place,
-    checkIn,
-    checkOut,
-    numberofGuests,
-    name,
-    phone,
-    price,
-    user: userData.id,
-  })
-    .then((doc) => {
-      res.json(doc);
-    })
-    .catch((err) => {
-      throw err;
-    });
 });
 
 app.get("/api/bookings", async (req, res) => {
