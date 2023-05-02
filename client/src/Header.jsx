@@ -20,10 +20,9 @@ export default function Header() {
 					Hi, welcome to my airbnb clone Webapp! <br/><br/> Allow me to provide you with a short tutorial.
 					You can browse and view property listings through the main page; however in order to book a stay you must first create an account. 
 					You can login or create an account by clicking the profile icon in the top right where you will be directed to the login/register page.
-					After logging in and then booking a stay you can view your booking in the My bookings section of your user account, which you can access by clicking your user icon again. 
+					After logging in and then booking a stay you can view your booking in the My bookings section of your user account. 
 					<br/><br/>You also have the option of adding properties that you will be hosting. To add a new property listing, click on the user icon, select My Accommodations, and then click on the 'Add New Place' button.
-					When creating a new listing, you have the option of selecting a picture which
-					users can view when first visiting the site. If you have to make changes regarding your properties information,
+					If you have to make changes regarding your properties information,
 					simply click on the listing from your My Accommodations page, change the information, and then resubmit it<br/><br/> 
 					Please feel free to communicate any issues you face when using the application or improvements you would like to see through the Contact Me portion of my profile website.
 					Thanks again for stopping by!
