@@ -17,7 +17,7 @@ export default function Header() {
 		(
   		<div className=" fixed w-full h-screen bg-primary/60 flex flex-col justify-center items-center z-20 top-0 left-0">
 				<p className="overflow-y-auto bg-gray-100 mb-24 w-3/4 2xl:w-1/2 p-8 rounded-md xl:text-lg border-gray-400 border-2 max-[600px]:text-sm max-[600px]:p-3 max-[600px]:w-full max-[600px]:mb-10">
-					Hi, welcome to my airbnb clone Webapp! <br/><br/> Allow me to provide you with a short tutorial.
+					Hi, welcome to my airbnb clone Webapp! <br/><br/> 
 					You can browse and view property listings through the main page; however in order to book a stay you must first create an account. 
 					You can login or create an account by clicking the profile icon in the top right where you will be directed to the login/register page.
 					After logging in and then booking a stay you can view your booking in the My bookings section of your user account. 
